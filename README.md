@@ -1,5 +1,5 @@
 # npm-unpublish-postfixed
-Interactive CLI to unpublish package versions easily.
+Interactive CLI to un-publish postfixed package versions easily.
 
 Install via npm:
 
