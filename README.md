@@ -7,4 +7,4 @@ Install via npm:
 
 Usage:
 
-    npm-unpublish-postfixed
+    npx npm-unpublish-postfixed
