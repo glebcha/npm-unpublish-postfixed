@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "ES2015",
+    "module": "commonjs",
+    "allowJs": true,
+    "sourceMap": false,
+    "strict": true,
+    "incremental": true,
+    "downlevelIteration": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": false,
+    "noImplicitReturns": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "outDir": "./build",
+    "lib": [
+      "ES2017",
+      "ES2018",
+      "ESNext"
+    ]
+  },
+  "include": ["src"],
+  "exclude": ["./node_modules/*", "./build/*"]
+}
