@@ -8,6 +8,7 @@
   "main": "build/index.js",
   "files": [
     "build/**/*.js",
+    "build/**/*.d.ts",
     "README.md"
   ],
   "repository": "https://github.com/glebcha/npm-unpublish-postfixed",
@@ -17,11 +18,11 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production tsc",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run build && npm run typegen",
     "lint:code": "eslint src --ext .ts,.tsx",
     "fix:code": "eslint src --ext .ts,.tsx --fix",
     "typecheck": "tsc --noEmit --project tsconfig.json",
-    "typegen": "npx tsc --declaration --emitDeclarationOnly --outDir build/types"
+    "typegen": "npx tsc --declaration --emitDeclarationOnly --outDir build"
   },
   "husky": {
     "hooks": {
