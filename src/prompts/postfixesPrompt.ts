@@ -1,10 +1,8 @@
-import chalk from 'chalk';
 import { prompt } from 'inquirer';
 
 import { getPostfixVersions } from '../getPostfixVersions';
+import { logger } from '../logger';
 import { ConfigRecord } from '../types';
-
-const { log } = console;
 
 export function postfixesPrompt(packageInfo: ConfigRecord) {
   return getPostfixVersions(packageInfo)
@@ -21,7 +19,7 @@ export function postfixesPrompt(packageInfo: ConfigRecord) {
       };
 
       if (choices.length === 0) {
-        log(chalk.yellow(`\nSorry, no postfixes for package "${packageInfo.name}"\n`));
+        logger.warning(`\nSorry, no postfixes for package "${packageInfo.name}"\n`);
         process.exit(0);
       }
 
