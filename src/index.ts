@@ -1,6 +1,6 @@
 import { spawn } from 'child_process';
 
-import chalk from 'chalk';
+import { blue, green, red } from 'colorette';
 import ora from 'ora';
 
 import { confirmationPropmt, Versions } from './prompts/confirmationPropmt';
@@ -36,7 +36,7 @@ export function run() {
     .then(([{ confirmation }, versions]: [{ confirmation: boolean }, Versions]) => {
       const hasVersions = Array.isArray(versions) && versions.length > 0;
       const shouldUnpublish = confirmation && hasVersions;
-      const text = chalk.blue('Begin to unpublish selected versions');
+      const text = blue('Begin to unpublish selected versions');
       
       spinner.start(text);
 
@@ -51,11 +51,11 @@ export function run() {
         null;
     })
     .then(() => {
-      const text = chalk.green('Successfully unpublished all selected versions');
+      const text = green('Successfully unpublished all selected versions');
       spinner.succeed(text);
     })
     .catch((error: Error) => {
-      const text = chalk.red(`Failed to unpublish selected versions\nError:\n${String(error?.message)}`);
+      const text = red(`Failed to unpublish selected versions\nError:\n${String(error?.message)}`);
       spinner.fail(text);
     });
 }

@@ -3,13 +3,13 @@ import {
   green,
   red, 
   yellow 
-} from 'chalk';
+} from 'colorette';
 
 const { log } = console;
 
 export const logger = {
-  success: (message?: string) => log(green(message)),
-  info: (message?: string) => log(blue(message)),
-  warning: (message?: string) => log(yellow(message)),
-  error: (message?: string) => log(red(message)),
+  success: (message = '') => log(green(message)),
+  info: (message = '') => log(blue(message)),
+  warning: (message = '') => log(yellow(message)),
+  error: (message = '') => log(red(message)),
 };
