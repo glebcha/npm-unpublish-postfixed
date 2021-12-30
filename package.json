@@ -14,7 +14,7 @@
   "repository": "https://github.com/glebcha/npm-unpublish-postfixed",
   "license": "MIT",
   "bin": {
-    "unpublish-postfixed": "bin/unpublish-postfixed"
+    "npm-unpublish-postfixed": "bin/npm-unpublish-postfixed"
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production tsc",
