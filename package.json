@@ -1,7 +1,7 @@
 {
   "name": "npm-unpublish-postfixed",
   "description": "Interactive CLI to unpublish postfixed package versions easily",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": {
     "name": "Glebcha"
   },
