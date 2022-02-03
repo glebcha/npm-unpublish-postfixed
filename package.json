@@ -9,6 +9,7 @@
   "files": [
     "build/**/*.js",
     "build/**/*.d.ts",
+    "images",
     "README.md"
   ],
   "repository": "https://github.com/glebcha/npm-unpublish-postfixed",
