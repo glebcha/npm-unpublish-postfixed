@@ -2,6 +2,7 @@ import { spawn } from 'child_process';
 
 import { blue, green, red } from 'colorette';
 import ora from 'ora';
+import getRegistry from 'registry-url';
 
 import { confirmationPropmt, Versions } from './prompts/confirmationPropmt';
 import { postfixesPrompt } from './prompts/postfixesPrompt';
@@ -10,13 +11,22 @@ import { readConfig } from './readConfig';
 import { ConfigRecord } from './types';
 
 const spinner = ora();
-let packageInfo = { name: '', repository: {} };
+let packageInfo = { 
+  name: '', 
+  registry: '',
+  repository: {}, 
+};
 
 function spawnPromise(cmd: string, args: Array<string>) {
   return new Promise(function (resolve, reject) {
     const process = spawn(cmd, args);
 
-    process.on('close', resolve);
+    process.on('close', (code: number) => {
+      const isError = code === 1;
+      const command = process.spawnargs.join(' ');
+
+      isError ? reject(`${command} exited unexpectedly`) : resolve(code);
+    });
     process.on('error', reject);
   });
 }
@@ -24,9 +34,16 @@ function spawnPromise(cmd: string, args: Array<string>) {
 export function run() {
   return readConfig('package.json')
     .then((info) => {
-      const { name, repository } = info as ConfigRecord;
+      const { name = '', repository } = info as ConfigRecord;
+      const [scope] = name.split('/');
+      const hasEmptyScope = scope.length === 0;
+      const registry = getRegistry(scope);
 
-      packageInfo = { name, repository };
+      if (hasEmptyScope) {
+        throw new Error('please check that package.json has property "name"');
+      }
+
+      packageInfo = { name, repository, registry };
 
       return packageInfo;
     })
@@ -45,7 +62,12 @@ export function run() {
           versions.map((version) => 
             spawnPromise(
               'npm', 
-              ['unpublish', `${packageInfo.name}@${String(version)}`], 
+              [
+                'unpublish', 
+                '--registry',
+                packageInfo.registry, 
+                `${packageInfo.name}@${String(version)}`,
+              ], 
             ),
           )) :
         null;
@@ -55,7 +77,7 @@ export function run() {
       spinner.succeed(text);
     })
     .catch((error: Error) => {
-      const text = red(`Failed to unpublish selected versions\nError:\n${String(error?.message)}`);
+      const text = red(`Failed to unpublish selected versions\nError:\n${String(error?.message ?? error)}`);
       spinner.fail(text);
     });
 }
