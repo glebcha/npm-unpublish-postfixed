@@ -1,5 +1,6 @@
 .sw?
 .idea/
+.vscode/
 dist/
 build/
 node/
@@ -10,4 +11,5 @@ target/
 .size-snapshot.json
 .eslintcache
 .openrc
+.DS_store
 tsconfig.tsbuildinfo
