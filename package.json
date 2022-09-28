@@ -31,7 +31,7 @@
     }
   },
   "dependencies": {
-    "colorette": "2.0.16",
+    "colorette": "^2.0.19",
     "inquirer": "8.2.0",
     "package-json": "7.0.0"
   },
