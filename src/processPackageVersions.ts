@@ -6,9 +6,9 @@ import { parseGitUrl } from './parseGitUrl';
 import { ConfigRecord, PostfixInfo } from './types';
 
 function getVersionPostfix(version = '') {
-    const matches = /([0-9.]+)(-)([a-zA-Z0-9?.-0-9]+)/g.exec(version) || [];
+    const matches = /([0-9.]+)(-)([a-zA-Z0-9].*\.)/g.exec(version) || [];
 
-    return matches[3];
+    return matches[3]?.replace('.', '');
 }
 
 export function processPackageVersions(
